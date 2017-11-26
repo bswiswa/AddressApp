@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-
+	
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -60,4 +60,6 @@ public class MainApp extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	
 }
