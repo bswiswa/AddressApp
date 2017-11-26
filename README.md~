@@ -1,8 +1,8 @@
-# JavaFX Tutorial by markojakob
+#JavaFX Tutorial by markojakob
 In this project an address app will be built using JavaFX
 Link to tutorial: http://code.makery.ch/library/javafx-8-tutorial/
 
-## Topics to be covered:
+##Topics to be covered:
 - Creating and starting a JavaFX project
 - Using Scene Builder to design the user interface
 - Structuring an application with the Model-View-Controller (MVC) pattern
