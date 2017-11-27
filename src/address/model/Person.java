@@ -16,7 +16,6 @@ public class Person {
 	private final IntegerProperty postalCode;
 	private final StringProperty city;
 	private final ObjectProperty<LocalDate> birthday;
-
 	//default constructor
 	public Person() {
 		this(null, null);
@@ -26,7 +25,6 @@ public class Person {
 	public Person(String firstName, String lastName) {
 		this.firstName = new SimpleStringProperty(firstName);
 		this.lastName = new SimpleStringProperty(lastName);
-		
 		//some initial dummy data, just for convenient testing
 		this.street = new SimpleStringProperty("some street");
 		this.postalCode = new SimpleIntegerProperty(1234);
