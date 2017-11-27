@@ -45,8 +45,8 @@ public class PersonOverviewController {
 	@FXML
 	private void initialize() {
 		//initialize the person table with the two columns
-		firstNameColumn.setCellValueFactory(cellData-> cellData.getValue().getFirstName());
-		lastNameColumn.setCellValueFactory(cellData-> cellData.getValue().getLastName());
+		firstNameColumn.setCellValueFactory(cellData-> cellData.getValue().firstNameProperty());
+		lastNameColumn.setCellValueFactory(cellData-> cellData.getValue().lastNameProperty());
 		//clear person details
 		showPersonDetails(null);
 		//Listen for selection changes and show the person details when changed
@@ -65,12 +65,12 @@ public class PersonOverviewController {
 	public void showPersonDetails(Person person) {
 		if(person != null) {
 			// Fill the labels with info from person object
-			firstNameLabel.setText(person.getFirstName().get());
-			lastNameLabel.setText(person.getLastName().get());
-			streetLabel.setText(person.getStreet().get());
-			postalCodeLabel.setText(Integer.toString(person.getPostalCode().get()));
-			cityLabel.setText(person.getCity().get());
-			birthdayLabel.setText(DateUtil.format(person.getBirthday().get()));
+			firstNameLabel.setText(person.getFirstName());
+			lastNameLabel.setText(person.getLastName());
+			streetLabel.setText(person.getStreet());
+			postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
+			cityLabel.setText(person.getCity());
+			birthdayLabel.setText(DateUtil.format(person.getBirthday()));
 		}else {
 			//person is null, remove all text
 			firstNameLabel.setText("");
@@ -98,5 +98,41 @@ public class PersonOverviewController {
 			alert.showAndWait();
 		}
 		
+	}
+	
+	/*
+	 * Called when user clicks the new button. Opens a dialog to edit details
+	 * for a new person
+	*/
+	@FXML
+	private void handleNewPerson() {
+		Person tempPerson = new Person();
+		boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
+		if(okClicked) {
+			mainApp.getPersonData().add(tempPerson);
+		}
+	}
+	
+	/* called when user clicks the edit button, opens dialog
+	 * to edit the selected person
+	 */
+	@FXML
+	private void handleEditPerson() {
+		Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+		if(selectedPerson != null) {
+			boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+			if(okClicked) {
+				showPersonDetails(selectedPerson);
+			}
+		}else {
+			//nothing selected
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Person Selected");
+			alert.setContentText("Please select a person in the table.");
+			
+			alert.showAndWait();
+		}
 	}
 }
