@@ -12,6 +12,7 @@ import address.view.PersonEditDialogController;
 import address.view.PersonOverviewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -41,7 +42,9 @@ public class MainApp extends Application {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("AddressApp");
-
+		//add application icon
+		this.primaryStage.getIcons().add(new Image("file:resources/images/address_book.png"));
+		
 		initRootLayout();
 		showPersonOverview();
 	}
@@ -104,6 +107,9 @@ public class MainApp extends Application {
 	        // Create the dialog Stage.
 	        Stage dialogStage = new Stage();
 	        dialogStage.setTitle("Edit Person");
+	        //set the icon of the dialog page
+	        dialogStage.getIcons().add(new Image("file:resources/images/address_book.png"));
+	        
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
 	        dialogStage.initOwner(primaryStage);
 	        Scene scene = new Scene(page);
