@@ -18,6 +18,7 @@ import address.model.Person;
 import address.model.PersonListWrapper;
 import address.view.PersonEditDialogController;
 import address.view.PersonOverviewController;
+import address.view.RootLayoutController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -58,6 +59,9 @@ public class MainApp extends Application {
 		showPersonOverview();
 	}
 
+	/* initializes root layout and tries to load 
+	 * last opened person file
+	 */
 	public void initRootLayout() {
 		try {
 			// load root layout from fxml file
@@ -66,11 +70,22 @@ public class MainApp extends Application {
 			rootLayout = (BorderPane) loader.load();
 
 			// show the scene containing the root layout
-			Scene scene = new Scene(rootLayout, 400, 200);
+			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
+			
+			//give the RootLayoutController access to the main app
+			RootLayoutController controller = loader.getController();
+			controller.setMainApp(this);
+			
 			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		
+		//try to load last opened person file
+		File file = getPersonFilePath();
+		if(file != null) {
+			loadPersonDataFromFile(file);
 		}
 	}
 

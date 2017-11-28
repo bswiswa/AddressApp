@@ -18,4 +18,11 @@ Link to tutorial: http://code.makery.ch/library/javafx-8-tutorial/
 
 ## Note
 The original tutorial was written with Java 8. I started off using Java 9 and I was fine until Part 5 when I needed to use the javax.xml package.
-This API is not made available by default in the class path of Java 9. You have to set the run configurations to explicitly include the java.xml package
+This API is not made available by default in the class path of Java 9. You have to set the run configurations to explicitly include the java.xml package.
+
+You can do this in the following steps on Eclipse:
+1. Right-click on projectName
+2. Select Build Path > Libraries > Modulepath 
+3. Click on Java 9 JRE > Is Modular
+4. Select java.xml.bind from the Available modules and move it to the Explicitly included modules
+5. Click OK > Apply and Close 
