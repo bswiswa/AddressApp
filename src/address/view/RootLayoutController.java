@@ -74,6 +74,12 @@ public class RootLayoutController {
 		}
 	}
 	
+	//opens the birthday statistics
+	@FXML
+	private void handleShowBirthdayStatistics() {
+		mainApp.showBirthdayStatistics();
+	}
+	
 	//opens an about dialog
 	@FXML
 	private void handleAbout() {
