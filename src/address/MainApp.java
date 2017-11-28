@@ -5,7 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.File;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 import address.model.Person;
 import address.view.PersonEditDialogController;
@@ -128,6 +131,38 @@ public class MainApp extends Application {
 	        e.printStackTrace();
 	        return false;
 	    }
+	}
+	
+	/* returns the person XML file that was last opened
+	 * this file would have been stored in the Preferences class
+	 * which allows us to store and persist simple application state on a system
+	 */
+	public File getPersonFilePath() {
+		Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+		String filePath = prefs.get("filePath", null);
+		if(filePath != null) {
+			return new File(filePath);
+		}else {
+			return null;
+		}
+	}
+	
+	/* set file path of Preferences to the currently loaded
+	 * file
+	 */
+	public void setPersonFilePath(File file) {
+		Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+		if(file != null) {
+			prefs.put("filePath", file.getPath());
+		
+			//update stage title
+			primaryStage.setTitle("AddressApp - "+ file.getName());
+		}else {
+			prefs.remove("filePath");
+		
+			//update stage title
+			primaryStage.setTitle("AddressApp");
+		}
 	}
 	
 	
